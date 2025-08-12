@@ -125,4 +125,31 @@ public class StudentRepositoryImp implements StudentRepository {
         }
         return result;
     }
+
+    @Override
+    public List<Student> search(String studentName) {
+        Connection conn = null;
+        CallableStatement callSt = null;
+        List<Student> listStudents = null;
+        try {
+            conn = ConnectionDB.openConnection();
+            callSt = conn.prepareCall("{call search_Student(?)}");
+            callSt.setString(1, studentName);
+            ResultSet rs = callSt.executeQuery();
+            listStudents = new ArrayList<Student>();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setStudentId(rs.getInt("student_id"));
+                student.setStudentName(rs.getString("student_name"));
+                student.setAge(rs.getInt("student_age"));
+                student.setStatus(rs.getBoolean("student_status"));
+                listStudents.add(student);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn, callSt);
+        }
+        return listStudents;
+    }
 }

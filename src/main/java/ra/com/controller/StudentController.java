@@ -73,4 +73,13 @@ public class StudentController {
             return "error";
         }
     }
+
+    @PostMapping("/searchStudent")
+    // Trong model của nó đang có listStudents - StudentNameSearch
+    public String seachStudent(Model model, @RequestParam("studentNameSearch") String studentNameSeach) {
+        //Thực gọi sang service thực hiện search
+        List<Student> listStudent = studentService.search(studentNameSeach);
+        model.addAttribute("listStudents", listStudent);
+        return "students";
+    }
 }

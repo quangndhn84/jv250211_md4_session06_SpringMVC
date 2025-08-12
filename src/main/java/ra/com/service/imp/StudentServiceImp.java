@@ -39,4 +39,9 @@ public class StudentServiceImp implements StudentService {
     public boolean delete(int studentId) {
         return studentRepository.delete(studentId);
     }
+
+    @Override
+    public List<Student> search(String studentName) {
+        return studentRepository.search(studentName);
+    }
 }

@@ -13,6 +13,11 @@
 </head>
 <body>
 <h3>List Students</h3>
+<form action="<%=request.getContextPath()%>/StudentController/searchStudent"  method="post">
+    <label>Student Name</label>
+    <input type="text" id="studentNameSearch" name="studentNameSearch"/>
+    <input type="submit" value="Search"/>
+</form>
 <table border="1">
     <thead>
     <tr>

@@ -14,4 +14,6 @@ public interface StudentRepository {
     boolean update(Student student);
 
     boolean delete(int studentId);
+
+    List<Student> search(String studentName);
 }
